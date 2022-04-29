@@ -16,5 +16,5 @@ class Item(models.Model):
     def __str__(self):
         return self.text
 
-class Notify():
+class Notify(): 
     notify = models.CharField(max_length=200)
