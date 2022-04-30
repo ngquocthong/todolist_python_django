@@ -3,14 +3,21 @@
 {% block title %}{{list.name}}{% endblock %}
 
 {% block content %} 
-    <ul>
-    {% for item in list.item_set.all %} 
-        {% if item.complete == True %}
-        <li>{{item.text}} - COMPLETE</li>
-        {% else %}
-        <li>{{item.text}} - INCOMPLETE</li>
-        {% endif %}
+    {{list.name}}
+    <form method="POST" action="#">
+        {% csrf_token %}
+    <ul>   
+        {% for item in list.item_set.all %} 
+            {% if item.complete == True %}
+                <li><input type="checkbox", value = "clicked", name="c{{item.id}}" checked> {{item.text}}</li>
+                {% else %}
+                <li><input type="checkbox", value = "clicked", name="c{{item.id}}">{{item.text}}</li>
+            {% endif %}
 
-    {% endfor %}
-    </ul>
+        {% endfor %}
+        </ul>
+        <button type="submit" name="save" value="save">Save</button>
+        <input type="text", name="new">
+        <button type="submit" name="newItem" value="newItem">Add Item</button>
+    </form>
 {% endblock %}
